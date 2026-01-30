@@ -520,6 +520,16 @@
     })();
 
     (function () {
+      var bannerLink = document.querySelector('.design03-banner-inner');
+      if (bannerLink) {
+        bannerLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.open('https://www.roundhr.com', '_blank', 'noopener,noreferrer');
+        });
+      }
+    })();
+
+    (function () {
       var els = document.querySelectorAll('.pintech01-slide-up');
       if (!els.length) return;
       var io = new IntersectionObserver(
