@@ -49,7 +49,7 @@ html, body {
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* Top Banner – 배경 이미지 (fill) */
+/* Top Banner – 배경 이미지 (fill), 화질 개선 */
 .top-banner-video .top-banner-bg {
   position: absolute;
   inset: 0;
@@ -63,6 +63,10 @@ html, body {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: scroll;
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .top-banner-video .top-banner-content {
   position: relative;
@@ -156,6 +160,42 @@ html, body {
   }
   .design01-card:hover::before {
     opacity: 1;
+  }
+}
+
+/* design03 카드 hover: Y축 10px 위로 + 옅은 블루 그림자 + 색상 반전 (design02/04와 동일한 모션) */
+.design03-card {
+  position: relative;
+  top: 0;
+  transition: top 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+    background 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+.design03-card .number,
+.design03-card .title,
+.design03-card .subtitle,
+.design03-card .description {
+  transition: color 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+.design03-card .design03-card-line {
+  transition: border-color 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+@media (hover: hover) and (min-width: 769px) {
+  .design03-card:hover {
+    top: -10px;
+    box-shadow: 0 10px 28px rgba(96, 165, 250, 0.25);
+    background: var(--color-primary);
+  }
+  .design03-card:hover .number,
+  .design03-card:hover .title,
+  .design03-card:hover .subtitle {
+    color: #fff;
+  }
+  .design03-card:hover .description {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .design03-card:hover .design03-card-line {
+    border-top-color: rgba(255, 255, 255, 0.35);
   }
 }
 
