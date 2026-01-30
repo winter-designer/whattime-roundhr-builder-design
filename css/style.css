@@ -1082,8 +1082,8 @@ a {
 }
 
 .design04-slider-wrap {
-  width: calc(100% + 2 * var(--section-padding-x));
-  margin-left: calc(-1 * var(--section-padding-x));
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
   overflow: hidden;
 }
 
