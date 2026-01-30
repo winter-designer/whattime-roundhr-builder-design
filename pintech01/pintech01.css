@@ -241,7 +241,7 @@ html, body {
   }
 }
 
-/* design03-banner: 박스(배경)를 inner로, hover 시 div 자체 기울임 */
+/* design03-banner: 박스(배경)를 inner로, hover 시 scale 축소 */
 .design03-banner {
   background: none;
   padding: 0;
@@ -264,7 +264,7 @@ html, body {
 }
 @media (hover: hover) and (min-width: 769px) {
   .design03-banner:hover .design03-banner-inner {
-    transform: rotate(-1.5deg);
+    transform: scale(0.94);
   }
 }
 /* 모바일 슬라이드 메뉴 – 헤더 위 옅은 블랙 오버레이, 우측에서 메뉴창 슬라이드 인 */
