@@ -1,0 +1,406 @@
+/* ========================================
+   pintech01 - 전용 스타일 / 애니메이션
+   style.css 수정 없이 이 파일에서만 추가
+   ======================================== */
+
+/* 가로 스크롤바 방지 (내부 스크롤바 제거) */
+html, body {
+  overflow-x: clip;
+}
+
+/* 버튼 border-radius 전체 8px (btn-top은 300px) */
+.btn,
+.header .nav .menu-btn,
+.header .mobile-menu-btn,
+.design05-copy-btn {
+  border-radius: 8px;
+}
+.btn-top {
+  border-radius: 300px;
+}
+
+/* 메뉴 클릭 시 스크롤 이동: 헤더 높이만큼 여백 (잘림 방지) */
+#design01,
+#design02,
+#design03,
+#design04,
+#design05 {
+  scroll-margin-top: 88px;
+}
+
+/* 로고 클릭 시 index.html 재로드 – 링크 레이아웃 유지 */
+.header .logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+/* 헤더 스크롤 시: 반투명 + 블러로 뒤 비침 */
+.header {
+  transition: background-color 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+              backdrop-filter 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+              -webkit-backdrop-filter 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+.header.scrolled {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Top Banner – 배경 이미지 (fill) */
+.top-banner-video .top-banner-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  background-image: url(images/top-banner-bg.png);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+.top-banner-video .top-banner-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Top Banner 타이틀 – 움직이는 그라데이션 (#000 ↔ 메인 컬러) */
+#top-banner .top-banner-content h1.title {
+  background: linear-gradient(90deg, #000, var(--color-primary), #000);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  animation: top-banner-title-gradient 10s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  animation-delay: 0.4s;
+}
+@keyframes top-banner-title-gradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* design01 타이틀: 좌측 정렬 (pintech01 전용) */
+#design01 .design01-title.text-center {
+  text-align: left;
+}
+/* design01 타이틀: 페이브릿지 메인 컬러 + 단어 단위 줄바꿈 */
+#design01 .design01-title .title {
+  word-break: keep-all;
+}
+#design01 .design01-title .title .design01-brand {
+  color: var(--color-primary);
+}
+
+/* design01 서비스 이미지 hover: white 60% + blur 오버레이, 중앙 "서비스 이용하기→" 14px bold */
+.design01-grid:not(.design01-cards) .design01-item .img-container {
+  position: relative;
+  cursor: pointer;
+}
+.design01-grid:not(.design01-cards) .design01-item .img-container::before,
+.design01-grid:not(.design01-cards) .design01-item .img-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.06s;
+  pointer-events: none;
+}
+.design01-grid:not(.design01-cards) .design01-item .img-container::before {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.design01-grid:not(.design01-cards) .design01-item .img-container::after {
+  content: '서비스 이용하기→';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-primary);
+  z-index: 1;
+}
+@media (hover: hover) and (min-width: 769px) {
+  .design01-grid:not(.design01-cards) .design01-item .img-container:hover::before,
+  .design01-grid:not(.design01-cards) .design01-item .img-container:hover::after {
+    opacity: 1;
+  }
+}
+
+/* design01 카드 hover: #000 20% 오버레이 + Y축 10px 위로 + 옅은 블루 그림자 */
+.design01-card {
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+.design01-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+  pointer-events: none;
+}
+@media (hover: hover) and (min-width: 769px) {
+  .design01-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 28px rgba(96, 165, 250, 0.25);
+  }
+  .design01-card:hover::before {
+    opacity: 1;
+  }
+}
+
+/* design02 카드 아이콘 – 배경 제거 */
+.design02-card .icon {
+  background-color: transparent;
+}
+
+/* design02 / design04 카드 hover: Y축 10px 위로 + 옅은 블루 그림자 */
+.design02-card,
+.design04-card {
+  position: relative;
+  top: 0;
+  transition: top 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+.design04-card {
+  transition: top 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+    background 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+@media (hover: hover) and (min-width: 769px) {
+  .design02-card:hover,
+  .design04-card:hover {
+    top: -10px;
+    box-shadow: 0 10px 28px rgba(96, 165, 250, 0.25);
+  }
+  .design04-card:hover {
+    background: #fff;
+  }
+}
+
+/* design03 콘텐츠 블록 hover: 약간 축소 */
+.design03-content {
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+@media (hover: hover) and (min-width: 769px) {
+  .design03-content:hover {
+    transform: scale(0.98);
+  }
+}
+
+/* design03-banner: 박스(배경)를 inner로, hover 시 div 자체 기울임 */
+.design03-banner {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  display: block;
+  gap: 0;
+}
+.design03-banner-inner {
+  text-decoration: none;
+  color: inherit;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%),
+              linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary) 100%);
+  border-radius: 15px;
+  padding: 42px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+@media (hover: hover) and (min-width: 769px) {
+  .design03-banner:hover .design03-banner-inner {
+    transform: rotate(-1.5deg);
+  }
+}
+/* 모바일 슬라이드 메뉴 – 헤더 위 옅은 블랙 오버레이, 우측에서 메뉴창 슬라이드 인 */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  background-color: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.mobile-menu-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.mobile-menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100vw - 70px);
+  height: 100%;
+  z-index: 1;
+  background-color: var(--color-white);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding: 80px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mobile-menu-overlay.is-open .mobile-menu-panel {
+  transform: translateX(0);
+}
+.mobile-menu-close {
+  position: fixed;
+  top: 12px;
+  right: var(--section-padding-x);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  z-index: 102;
+}
+.mobile-menu-close .icon {
+  font-size: 24px;
+}
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobile-menu-btn-item {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  text-align: left;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.mobile-menu-btn-item:hover {
+  background-color: var(--color-secondary);
+}
+.mobile-menu-btn-item.primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  margin-top: 8px;
+}
+.mobile-menu-btn-item.primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+@media (max-width: 1439px) {
+  .mobile-menu-overlay {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .logo {
+    height: 26px;
+  }
+  .design02-values {
+    flex-direction: column;
+  }
+  /* top-banner 배경 fill 확인 (cover + 100% 크기) */
+  .top-banner-video .top-banner-bg {
+    background-size: cover;
+    background-position: center center;
+  }
+  /* top-banner 배경 위 white opacity 70% 오버레이 */
+  .top-banner-video .top-banner-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* design04 무한 슬라이더 – 속도 완화 + 시작 딜레이 (마지막·첫 사이는 gap 유지) */
+.design04-slider-track[data-infinite-slider] {
+  animation-duration: 22s;
+  animation-delay: 0.25s;
+}
+
+/* design05 그리드 이미지 hover: 영역 안에서 110% 스케일 */
+.design05-grid .img-container {
+  overflow: hidden;
+}
+.design05-grid .img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+@media (hover: hover) and (min-width: 769px) {
+  .design05-grid .img-container:hover img {
+    transform: scale(1.1);
+  }
+}
+
+/* full-banner: 이미지·오버레이 없이 메인 컬러 배경, 버튼 #000 */
+.full-banner-solid .full-banner-bg {
+  background-color: var(--color-primary);
+}
+.full-banner-solid .btn {
+  background-color: #000;
+  color: #fff;
+  transition: background-color 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s,
+              color 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+}
+@media (hover: hover) and (min-width: 769px) {
+  .full-banner-solid .btn:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+/* 스크롤 슬라이드업: 섹션이 뷰포트에 들어오면 아래→위 (딜레이 완화) */
+.pintech01-slide-up {
+  opacity: 0;
+  transform: translate3d(0, 40px, 0);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.04s,
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.04s;
+}
+.pintech01-slide-up.pintech01-in-view {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* 섹션 내부 div 순차 슬라이드업 (자연스럽게 순서대로 등장) */
+.pintech01-inner-slide {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+.pintech01-slide-up.pintech01-in-view .pintech01-inner-slide {
+  animation: pintech01-inner-slide-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+@keyframes pintech01-inner-slide-up {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
